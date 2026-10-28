@@ -256,6 +256,13 @@ section { position: relative; }
 @media (min-width: 900px) { .vanish-sec.pad { padding-top: 24px; } }
 .seam.s1 { height: 120px; }
 @media (min-width: 900px) { .seam.s1 { height: 180px; } }
+/* Sessão 02 → 03: mesmo encaixe da 01 → 02 */
+.vanish-sec.pad { padding-bottom: 12px; }
+@media (min-width: 900px) { .vanish-sec.pad { padding-bottom: 28px; } }
+.seam.s2 { height: 120px; }
+@media (min-width: 900px) { .seam.s2 { height: 180px; } }
+.turn.pad { padding-top: 12px; }
+@media (min-width: 900px) { .turn.pad { padding-top: 28px; } }
 .vanish-sec .wrap { display: grid; gap: 20px; justify-items: center; text-align: center; }
 @media (min-width: 960px) { .vanish-sec .wrap { gap: 44px; } }
 .v-head h2 { margin-bottom: 10px; }
@@ -270,7 +277,7 @@ section { position: relative; }
   box-shadow: 0 30px 60px rgba(10,42,29,0.28), inset 0 0 0 2px #2C332F;
 }
 .v-screen { position: relative; overflow: hidden; border-radius: 38px; background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Roboto, 'Segoe UI', Inter, sans-serif; color: #111B21; }
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', sans-serif; color: #111B21; }
 .v-status { position: relative; display: flex; justify-content: space-between; align-items: center; height: 40px; padding: 0 22px 0 26px; font-size: 14px; font-weight: 600; }
 .v-island { position: absolute; left: 50%; top: 9px; width: 88px; height: 24px; margin-left: -44px; border-radius: 14px; background: #000; }
 .v-sys { display: flex; align-items: center; gap: 5px; }
@@ -288,16 +295,18 @@ section { position: relative; }
 .v-chips span { flex-shrink: 0; padding: 5px 11px; border-radius: 16px; background: #F0F2F5; color: #54656F; font-size: 13px; font-weight: 500; }
 .v-chips span.on { background: #D9FDD3; color: #0A7A3E; font-weight: 600; }
 .v-list { list-style: none; }
-.v-row { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; padding: 8px 16px;
+.v-row { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; padding: 6px 14px;
   animation: vRowRed 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
 .v-av, .v-name, .v-mtext, .v-time { animation: vDim 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
-.v-av { width: 48px; height: 48px; border-radius: 50%; background: #DFE5E7; overflow: hidden; display: block; }
+.v-av { width: 44px; height: 44px; border-radius: 50%; background: #DFE5E7; overflow: hidden; display: block; }
 .v-av svg { width: 100%; height: 100%; display: block; }
 .v-txt { min-width: 0; display: block; }
 .v-name, .v-msg { display: block; }
 .v-name { font-size: 16px; font-weight: 600; color: #111B21; line-height: 1.25; }
-.v-msg { position: relative; display: flex; align-items: center; gap: 3px; font-size: 14px; color: #667781; line-height: 1.35; min-width: 0; }
-.v-mtext { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v-msg { position: relative; display: flex; align-items: flex-start; gap: 3px; font-size: 14px; color: #667781; line-height: 1.3; min-width: 0; min-height: 2.6em; }
+/* como no WhatsApp do iPhone: a prévia mostra até duas linhas */
+.v-mtext { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: normal; }
+.v-msg .v-tick { margin-top: 3px; }
 .v-tick { flex-shrink: 0; width: 17px; height: 12px; color: #8696A0; animation: vRead 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
 .v-time { align-self: start; margin-top: 3px; font-size: 12px; color: #667781; }
 /* 1) entregue → lida  2) a conversa esfria (cinza)  3) fica vermelha: sumiu, não agendou */
@@ -314,7 +323,7 @@ section { position: relative; }
 @keyframes vType { 0%, 20% { opacity: 0; } 23%, 33% { opacity: 1; } 36%, 100% { opacity: 0; } }
 .vanish-sec:not(.inview) .v-tick, .vanish-sec:not(.inview) .v-typing, .vanish-sec:not(.inview) .v-row, .vanish-sec:not(.inview) .v-av, .vanish-sec:not(.inview) .v-name, .vanish-sec:not(.inview) .v-mtext, .vanish-sec:not(.inview) .v-time, .vanish-sec:not(.inview) .v-lost { animation-play-state: paused; }
 .v-tabs { display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px 4px 22px; border-top: 1px solid #E9EDEF; background: #fff; }
-.v-tabs span { display: grid; justify-items: center; gap: 3px; font-size: 11px; font-weight: 500; color: #54656F; }
+.v-tabs span { display: grid; justify-items: center; gap: 3px; min-width: 0; font-size: 10.5px; font-weight: 500; letter-spacing: -0.01em; color: #54656F; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .v-tabs b { display: grid; place-items: center; width: 54px; height: 30px; border-radius: 16px; }
 .v-tabs svg { width: 21px; height: 21px; }
 .v-tabs span.on { color: #111B21; font-weight: 700; }
@@ -363,10 +372,8 @@ section { position: relative; }
 @media (max-width: 420px) {
   .v-scene { inset: -10px 0 0; }
   .v-bub { display: none; }
-  .v-tabs span { font-size: 9.5px; }
   .v-tabs b { width: 46px; height: 28px; }
   .v-lost { font-size: 12px; gap: 4px; }
-  .v-row { gap: 10px; padding: 8px 14px; }
   .v-lost::before { width: 6px; height: 6px; }
   .v-glow { width: 380px; height: 380px; margin: -190px 0 0 -190px; }
 }
