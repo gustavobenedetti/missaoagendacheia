@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Agenda Cheia | Treinamento para a recepção da sua clínica</title>
+<meta name="description" content="Treinamento prático para a recepção da sua clínica transformar mais mensagens em consultas agendadas. Playbook, scripts e planilha de resultados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+  CONFIGURAÇÃO
+  1. checkoutUrl: link do produto na Cakto.
+  2. pixelId: ID do pixel da Meta (o mesmo do formulário, ou um pixel novo para este produto).
+     Com pixelId vazio, nenhum evento é disparado (útil para revisar a página).
+-->
+<script>
+  window.MAC_CONFIG = {
+    checkoutUrl: '#checkout',
+    pixelId: ''
+  };
+</script>
+
+<!-- Meta Pixel: carrega só se houver pixelId -->
+<script>
+(function(){
+  var id = window.MAC_CONFIG.pixelId;
+  if (!id) return;
+  var pv;
+  try {
+    pv = sessionStorage.getItem('mac_pv_id');
+    if (!pv) { pv = 'mac_pv_' + Date.now() + '_' + Math.random().toString(36).slice(2,10); sessionStorage.setItem('mac_pv_id', pv); }
+  } catch(e) { pv = 'mac_pv_' + Date.now(); }
+  window.MAC_PV_ID = pv;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', id);
+  fbq('track', 'PageView', {}, { eventID: pv });
+})();
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --night: #021A11;
+  --forest: #05261A;
+  --forest-2: #083021;
+  --line: #0F3D2B;
+  --royal-1: #138552;
+  --royal-2: #0B6640;
+  --royal-3: #084E31;
+  --gold: #E3B94F;
+  --gold-light: #F6DE9C;
+  --gold-deep: #B8892A;
+  --paper: #EEF2EC;
+  --paper-2: #E1E9E0;
+  --paper-line: #C9D6CB;
+  --ink: #0A2A1D;
+  --ink-soft: #3B5849;
+  --white: #F4F5F2;
+  --mute: #A9B9AF;
+  --alert: #C2553A;
+
+  --serif: 'PT Serif', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --wrap: 1120px;
+  --gutter: 20px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--white);
+  background: var(--night);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.narrow { max-width: 720px; }
+
+/* ---------- Tipografia ---------- */
+h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 6.4vw, 44px); line-height: 1.14; text-wrap: balance; }
+h3 { font-size: 21px; line-height: 1.25; }
+p { max-width: 62ch; }
+.lead { font-size: 19px; line-height: 1.55; }
+
+/* ---------- Botão principal (verde royal da marca) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 58px; padding: 16px 30px;
+  font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: 0.01em;
+  color: #fff; text-decoration: none; text-align: center;
+  background: linear-gradient(180deg, var(--royal-1) 0%, var(--royal-2) 52%, var(--royal-3) 100%);
+  border: 1px solid rgba(246, 222, 156, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.28), 0 0 26px rgba(23,137,90,0.32), inset 0 1px 0 rgba(255,255,255,0.18);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { background: linear-gradient(180deg, #1A9A65 0%, #10774C 55%, #0B5E3B 100%); box-shadow: 0 10px 28px rgba(0,0,0,0.32), 0 0 36px rgba(23,137,90,0.48), inset 0 1px 0 rgba(255,255,255,0.22); }
+.btn:active { transform: translateY(1px) scale(0.99); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 3px solid var(--gold-light); outline-offset: 3px;
+}
+.btn-note { margin-top: 12px; font-size: 14px; color: var(--mute); }
+.on-paper .btn-note { color: var(--ink-soft); }
+
+/* ---------- Seções ---------- */
+section { position: relative; }
+.dark { background: var(--night); color: var(--white); }
+.forest { background: var(--forest); color: var(--white); }
+.on-paper { background: var(--paper); color: var(--ink); }
+.pad { padding: 76px 0; }
+@media (min-width: 900px) { .pad { padding: 112px 0; } }
+
+/* ---------- Topo ---------- */
+.topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 5; }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-logo {
+  /* ESPAÇO RESERVADO: troque por <img src="logo.svg" alt="Grupo Branches" height="28"> */
+  width: 30px; height: 30px; border-radius: 8px;
+  border: 1px dashed rgba(246,222,156,0.6);
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 700; color: var(--gold-light);
+}
+.brand-name { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; color: rgba(246,222,156,0.9); }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 88px 0 72px;
+  background:
+    radial-gradient(ellipse 110% 70% at 70% 0%, #0A4A2F 0%, rgba(3,38,23,0.6) 42%, transparent 72%),
+    var(--night);
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 30%, #000 20%, transparent 85%);
+  mask-image: radial-gradient(ellipse 70% 60% at 60% 30%, #000 20%, transparent 85%);
+}
+.hero .wrap { position: relative; display: grid; gap: 40px; }
+.hero .wrap { justify-items: center; text-align: center; }
+.hero-copy { max-width: 860px; display: flex; flex-direction: column; align-items: center; }
+.hero .agenda { width: 100%; max-width: 600px; text-align: left; }
+/* agenda compacta no topo */
+.hero .agenda { max-width: 440px; padding: 16px 16px 14px; border-radius: 14px; }
+.hero .agenda-head { margin-bottom: 10px; }
+.hero .agenda-title { font-size: 16px; }
+.hero .agenda-sub { font-size: 12px; }
+.hero .agenda-count strong { font-size: 24px; }
+.hero .agenda-count span { font-size: 11px; }
+.hero .agenda-grid { grid-template-columns: 38px repeat(5, 1fr); gap: 4px; }
+.hero .agenda-day { font-size: 11px; padding-bottom: 2px; }
+.hero .agenda-period { font-size: 10px; }
+.hero .agenda-gap { height: 4px; }
+.hero .slot { height: 18px; border-radius: 5px; }
+.hero .agenda-legend { margin-top: 10px; gap: 12px; font-size: 11px; }
+.hero .agenda-legend i { width: 10px; height: 10px; }
+.hero .agenda-caption { margin-top: 6px; font-size: 11px; }
+.m-only { display: none; }
+@media (min-width: 960px) {
+  .hero { padding: 112px 0 110px; }
+  .hero .wrap { gap: 64px; }
+}
+.product-name {
+  display: inline-block;
+  font-family: var(--serif); font-weight: 700; font-style: normal;
+  font-size: 18px; line-height: 1.1; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-light);
+  padding: 10px 22px 10px calc(22px + 0.12em);
+  border: 1px solid rgba(246, 222, 156, 0.55);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(246,222,156,0.14), rgba(227,185,79,0.05));
+  box-shadow: 0 0 22px rgba(227,185,79,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+.hero h1 { font-family: var(--sans); font-weight: 800; font-size: clamp(20px, 4.4vw, 30px); line-height: 1.18; letter-spacing: 0.005em; text-transform: uppercase; margin-bottom: 24px; text-wrap: balance; color: #fff; max-width: 26ch; }
+@media (min-width: 960px) { .hero h1 { max-width: 40ch; } }
+.hero h1 .gold {
+  display: block;
+  color: var(--gold);
+  background: linear-gradient(180deg, #FBEBBB 0%, #F1D27F 34%, #E3B94F 58%, #D2A43E 82%, #E8C566 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  padding-bottom: 0.06em;
+}
+.hero h1 .white { display: block; color: #fff; }
+.hero .lead { color: #D3DDD7; margin: 0 auto 32px; }
+.hero-cta { display: flex; flex-direction: column; align-items: center; width: 100%; }
+@media (max-width: 599px) { .hero-cta .btn { width: 100%; } }
+
+/* Agenda da semana (o elemento memorável) */
+.agenda {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+  border: 1px solid rgba(246,222,156,0.28);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+.agenda-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.agenda-title { font-family: var(--serif); font-size: 19px; color: #fff; }
+.agenda-sub { font-size: 13px; color: var(--mute); }
+.agenda-count { text-align: right; flex-shrink: 0; }
+.agenda-count strong { display: block; font-family: var(--serif); font-size: 30px; line-height: 1; color: var(--gold); font-variant-numeric: tabular-nums; }
+.agenda-count span { font-size: 12px; color: var(--mute); }
+.agenda-grid { display: grid; grid-template-columns: 46px repeat(5, 1fr); gap: 6px; }
+.agenda-day { text-align: center; font-size: 12px; font-weight: 600; color: var(--mute); padding-bottom: 4px; }
+.agenda-period { font-size: 11px; color: var(--mute); display: flex; align-items: center; }
+.agenda-gap { grid-column: 1 / -1; height: 6px; }
+.slot {
+  height: 30px; border-radius: 7px;
+  border: 1px dashed rgba(169,185,175,0.38);
+  background: transparent;
+  position: relative;
+  transition: background .35s ease, border-color .35s ease, transform .35s ease;
+}
+.slot.filled { border: 1px solid rgba(19,133,82,0.9); background: linear-gradient(180deg, #138552, #0B6640); }
+.slot.new { border-color: var(--gold-light); background: linear-gradient(180deg, #F1D27F, #D2A43E); transform: scale(1.04); }
+.slot.new.settled { transform: none; }
+.agenda-legend { display: flex; gap: 18px; margin-top: 16px; font-size: 12px; color: var(--mute); flex-wrap: wrap; }
+.agenda-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; }
+.lg-filled { background: #138552; }
+.lg-empty { border: 1px dashed rgba(169,185,175,0.6); }
+.lg-new { background: #E3B94F; }
+.agenda-caption { margin-top: 12px; font-size: 12px; color: rgba(169,185,175,0.75); }
+
+
+/* ---------- Agenda no estilo de calendário (claro, cores de eventos) ---------- */
+.agenda { background: #FFFFFF; border: 1px solid #DADCE0; box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+.agenda-title { color: #3C4043; font-family: var(--sans); font-weight: 600; }
+.agenda-sub { color: #70757A; }
+.agenda-count strong { color: #1A73E8; font-family: var(--sans); font-weight: 700; }
+.agenda-count span { color: #70757A; }
+.agenda-day { color: #70757A; letter-spacing: 0.04em; }
+.agenda-period { color: #70757A; }
+.slot { border: 0; background: #F1F3F4; border-radius: 4px; transition: background .35s ease, transform .35s ease; }
+.slot.filled { border: 0; }
+.slot.pop { transform: scale(1.08); }
+
+/* ---------- Bloco 02: O problema ---------- */
+.problem .wrap { display: grid; gap: 44px; }
+@media (min-width: 960px) { .problem .wrap { grid-template-columns: 1fr 0.9fr; align-items: center; gap: 72px; } }
+.problem h2 { margin-bottom: 20px; }
+.problem p { color: var(--ink-soft); margin-bottom: 26px; }
+.leaks { list-style: none; display: grid; gap: 12px; }
+.leaks li {
+  display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start;
+  padding: 14px 16px; background: #fff; border: 1px solid var(--paper-line); border-radius: var(--radius-md);
+  font-size: 16px; line-height: 1.45; color: var(--ink);
+}
+.leaks svg { width: 20px; height: 20px; margin-top: 1px; color: var(--alert); }
+
+/* Conversa de WhatsApp */
+.phone {
+  max-width: 380px; width: 100%; margin: 0 auto;
+  background: #E7DED3; border-radius: 26px; padding: 0 0 18px;
+  border: 8px solid #0A2A1D; box-shadow: 0 30px 60px rgba(10,42,29,0.22);
+  overflow: hidden;
+}
+.phone-bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #0B6640; color: #fff; }
+.phone-avatar { width: 34px; height: 34px; border-radius: 50%; background: #F6DE9C; color: #0A2A1D; display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.phone-who { font-size: 14px; font-weight: 600; line-height: 1.2; }
+.phone-who small { display: block; font-weight: 400; font-size: 12px; opacity: 0.85; }
+.chat { display: flex; flex-direction: column; gap: 8px; padding: 16px 12px 4px; }
+.chat-day { align-self: center; font-size: 11px; background: rgba(255,255,255,0.75); color: #3B5849; padding: 3px 10px; border-radius: 8px; margin-bottom: 4px; }
+.msg { max-width: 82%; padding: 8px 10px 6px; border-radius: 10px; font-size: 14.5px; line-height: 1.4; color: #111B16; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+.msg time { display: block; text-align: right; font-size: 10.5px; color: #6B7C72; margin-top: 2px; }
+.msg.in { align-self: flex-start; background: #fff; border-top-left-radius: 2px; }
+.msg.out { align-self: flex-end; background: #D9FDD3; border-top-right-radius: 2px; }
+.chat-wait { align-self: flex-start; font-size: 12px; color: #6B7C72; font-style: italic; padding: 6px 4px 0; }
+.problem .chat-end {
+  margin: 14px 12px 0; padding: 12px 14px; border-radius: 12px;
+  background: #0A2A1D; color: var(--gold-light); font-size: 14px; line-height: 1.45;
+}
+
+/* ---------- Bloco 03: Calculadora ---------- */
+.calc-section { padding-top: 0; }
+.calc {
+  display: grid; gap: 28px;
+  background: #fff; border: 1px solid var(--paper-line); border-radius: var(--radius-lg);
+  padding: 28px 22px; box-shadow: 0 18px 50px rgba(10,42,29,0.08);
+}
+@media (min-width: 900px) { .calc { grid-template-columns: 1.1fr 0.9fr; padding: 44px; gap: 44px; } }
+.calc h2 { font-size: clamp(26px, 5.6vw, 36px); margin-bottom: 12px; }
+.calc-intro { color: var(--ink-soft); margin-bottom: 26px; font-size: 16px; }
+.field { margin-bottom: 20px; }
+.field label { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.field output { font-variant-numeric: tabular-nums; color: var(--royal-2); font-weight: 700; }
+.field input[type=range] { width: 100%; accent-color: #0B6640; height: 28px; }
+.field .hint { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+.calc-result {
+  background: var(--ink); color: var(--white); border-radius: var(--radius-md);
+  padding: 26px 22px; display: flex; flex-direction: column; justify-content: center;
+}
+.calc-result .r-label { font-size: 14px; color: var(--mute); }
+.calc-result .r-money { font-family: var(--serif); font-size: clamp(40px, 10vw, 54px); line-height: 1.05; color: var(--gold); margin: 6px 0 4px; font-variant-numeric: tabular-nums; }
+.calc-result .r-per { font-size: 15px; color: #D3DDD7; }
+.calc-result hr { border: 0; height: 1px; background: rgba(246,222,156,0.2); margin: 20px 0; }
+.r-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 4px 0; color: #D3DDD7; }
+.r-row strong { color: #fff; font-variant-numeric: tabular-nums; }
+.calc-note { font-size: 13px; color: var(--mute); margin-top: 16px; line-height: 1.45; }
+
+/* ---------- Bloco 04: Virada ---------- */
+.turn { text-align: left; }
+.turn h2 { margin-bottom: 22px; max-width: 18ch; }
+.turn p { font-size: 19px; color: #D3DDD7; }
+.turn-flow { display: grid; gap: 12px; margin-top: 40px; }
+@media (min-width: 760px) { .turn-flow { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+.turn-step {
+  border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;
+  background: rgba(255,255,255,0.025);
+}
+.turn-step .n { font-family: var(--serif); font-size: 15px; color: var(--gold); margin-bottom: 6px; }
+.turn-step h3 { font-size: 19px; margin-bottom: 6px; }
+.turn-step p { font-size: 15px; color: var(--mute); }
+
+/* ---------- Bloco 05: Entregáveis ---------- */
+.deliver-head { margin-bottom: 40px; }
+.deliver-head h2 { margin-bottom: 14px; }
+.deliver-head p { color: #D3DDD7; }
+.deliver { display: grid; gap: 18px; }
+@media (min-width: 900px) { .deliver { grid-template-columns: 1fr 1fr; } .deliver .wide { grid-column: 1 / -1; } }
+.item {
+  display: grid; gap: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px;
+}
+@media (min-width: 640px) { .deliver .wide { grid-template-columns: 360px 1fr; align-items: center; } }
+@media (min-width: 900px) { .deliver .wide { grid-template-columns: 400px 1fr; gap: 32px; } }
+.item h3 { margin-bottom: 8px; }
+.item p { font-size: 15.5px; color: #C9D4CD; }
+.item .tag { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--gold-light); }
+
+/* mockups em CSS */
+.mock-video {
+  aspect-ratio: 16 / 10; border-radius: 10px; position: relative; overflow: hidden;
+  background: radial-gradient(circle at 30% 30%, #0F5A3A, #052B1C 70%);
+  border: 1px solid rgba(246,222,156,0.25);
+}
+.mock-video .play {
+  position: absolute; left: 50%; top: 52%; transform: translate(-50%,-50%);
+  width: 46px; height: 46px; border-radius: 50%; background: rgba(246,222,156,0.95);
+  display: grid; place-items: center;
+}
+.mock-video .play::after { content: ''; border-left: 13px solid #0A2A1D; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
+.mock-video .bar { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.2); }
+.mock-video .bar::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 36%; border-radius: 4px; background: var(--gold); }
+.mock-video .cap { position: absolute; left: 10px; top: 9px; font-size: 10.5px; color: rgba(255,255,255,0.8); font-weight: 600; }
+.mock-doc {
+  aspect-ratio: 16 / 10; border-radius: 10px; background: var(--paper); position: relative; overflow: hidden;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;
+}
+.mock-doc .t { font-family: var(--serif); font-weight: 700; font-size: 12px; color: var(--ink); margin-bottom: 2px; }
+.mock-doc i { display: block; height: 5px; border-radius: 3px; background: var(--paper-line); }
+.mock-doc i.s { width: 62%; }
+.mock-doc i.g { background: #9DC3AE; width: 45%; }
+.mock-sheet {
+  border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid rgba(246,222,156,0.3);
+  font-size: 11.5px; color: var(--ink);
+}
+.mock-sheet table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.mock-sheet th { background: #0B6640; color: #fff; font-weight: 600; text-align: left; padding: 7px 8px; }
+.mock-sheet td { padding: 6px 8px; border-top: 1px solid #E1E9E0; }
+.mock-sheet td.up { color: #0B6640; font-weight: 700; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ---------- Bloco 06: Bônus ---------- */
+.bonus {
+  margin-top: 26px;
+  border-radius: var(--radius-lg); padding: 28px 24px;
+  background:
+    linear-gradient(160deg, rgba(246,222,156,0.12), rgba(255,255,255,0.03)) padding-box,
+    linear-gradient(var(--forest), var(--forest)) padding-box,
+    linear-gradient(135deg, #F6DE9C, rgba(255,255,255,0.25) 45%, #B8892A) border-box;
+  border: 1px solid transparent;
+  display: grid; gap: 18px;
+}
+@media (min-width: 900px) { .bonus { grid-template-columns: auto 1fr; align-items: center; padding: 34px 38px; gap: 30px; } }
+.bonus-seal {
+  width: 92px; height: 92px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FBEBBB, #E3B94F 55%, #B8892A);
+  color: #0A2A1D; display: grid; place-items: center; text-align: center;
+  font-family: var(--serif); font-weight: 700; font-size: 15px; line-height: 1.1;
+  box-shadow: 0 10px 26px rgba(184,137,42,0.35);
+}
+.bonus h3 { font-size: 23px; margin-bottom: 8px; color: #fff; }
+.bonus p { color: #D3DDD7; font-size: 16px; }
+
+/* ---------- Bloco 07: Para quem é ---------- */
+.fit { display: grid; gap: 18px; margin-top: 34px; }
+@media (min-width: 860px) { .fit { grid-template-columns: 1.2fr 0.8fr; } }
+.fit-col { border-radius: var(--radius-lg); padding: 26px 24px; }
+.fit-yes { background: #fff; border: 1px solid var(--paper-line); }
+.fit-no { background: var(--paper-2); border: 1px solid var(--paper-line); }
+.fit-col h3 { margin-bottom: 16px; color: var(--ink); }
+.fit-col ul { list-style: none; display: grid; gap: 12px; }
+.fit-col li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 16px; line-height: 1.45; color: var(--ink); }
+.fit-col svg { width: 20px; height: 20px; margin-top: 2px; }
+.fit-yes svg { color: #0B6640; }
+.fit-no svg { color: #7A8B81; }
+.fit-no li { color: var(--ink-soft); }
+
+/* ---------- Bloco 08: Quem ensina ---------- */
+.teacher { display: grid; gap: 34px; margin-top: 8px; }
+@media (min-width: 900px) { .teacher { grid-template-columns: 300px 1fr; gap: 56px; align-items: start; } }
+.portrait {
+  /* ESPAÇO RESERVADO: troque por <img src="gustavo.jpg" alt="Gustavo Benedetti"> com object-fit: cover */
+  aspect-ratio: 4 / 5; border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0F5A3A, #052B1C);
+  border: 1px dashed rgba(246,222,156,0.5);
+  display: grid; place-items: center; text-align: center; padding: 20px;
+  color: var(--gold-light); font-size: 14px;
+  max-width: 220px;
+}
+@media (min-width: 900px) { .portrait { max-width: 300px; } }
+.portrait strong { display: block; font-family: var(--serif); font-size: 46px; line-height: 1; margin-bottom: 8px; color: var(--gold); }
+.teacher h2 { margin-bottom: 18px; }
+.teacher p { color: #D3DDD7; margin-bottom: 26px; }
+.cases { display: grid; gap: 12px; }
+@media (min-width: 640px) { .cases { grid-template-columns: repeat(3, 1fr); } }
+.case { border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px; background: rgba(255,255,255,0.03); }
+.case .from-to { font-family: var(--serif); font-size: 22px; color: var(--gold); line-height: 1.2; margin-bottom: 6px; }
+.case p { font-size: 14.5px; color: var(--mute); margin: 0; }
+.cases-note { font-size: 13px; color: rgba(169,185,175,0.75); margin-top: 14px; }
+
+/* ---------- Bloco 10 e 11: Oferta e garantia ---------- */
+.offer { display: grid; gap: 22px; }
+@media (min-width: 960px) { .offer { grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; } }
+.offer h2 { margin-bottom: 16px; }
+.offer-intro { color: #D3DDD7; }
+.price-card {
+  border-radius: 22px; padding: 30px 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)) padding-box,
+    linear-gradient(var(--forest), var(--forest)) padding-box,
+    linear-gradient(135deg, rgba(246,222,156,0.85), rgba(255,255,255,0.2) 45%, rgba(227,185,79,0.6)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+}
+@media (min-width: 600px) { .price-card { padding: 38px 36px; } }
+.price-card .pname { font-family: var(--serif); font-style: italic; color: var(--gold-light); font-size: 18px; }
+.includes { list-style: none; display: grid; gap: 12px; margin: 20px 0 26px; }
+.includes li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 16px; line-height: 1.4; color: #E3EAE5; }
+.includes svg { width: 20px; height: 20px; color: var(--gold); margin-top: 1px; }
+.includes .b { color: var(--gold-light); }
+.price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+.price .cur { font-family: var(--serif); font-size: 28px; color: #fff; }
+.price .val { font-family: var(--serif); font-size: 76px; line-height: 0.95; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+.price .once { font-size: 15px; color: var(--mute); }
+.price-sub { font-size: 15px; color: var(--gold-light); margin-bottom: 24px; }
+.price-card .btn { width: 100%; }
+.pay { display: flex; justify-content: center; gap: 16px; margin-top: 14px; font-size: 13px; color: var(--mute); flex-wrap: wrap; }
+
+.guarantee {
+  margin-top: 40px; display: grid; gap: 18px; align-items: center;
+  border-top: 1px solid var(--line); padding-top: 36px;
+}
+@media (min-width: 760px) { .guarantee { grid-template-columns: auto 1fr; gap: 28px; } }
+.g-badge {
+  width: 96px; height: 96px; border-radius: 50%;
+  border: 2px solid var(--gold); display: grid; place-items: center; text-align: center;
+  font-family: var(--serif); color: var(--gold-light); line-height: 1.05;
+}
+.g-badge strong { display: block; font-size: 34px; color: var(--gold); }
+.g-badge span { font-size: 13px; }
+.guarantee h3 { margin-bottom: 8px; }
+.guarantee p { color: #D3DDD7; font-size: 16px; }
+
+/* ---------- Bloco 12: Perguntas ---------- */
+.faq-list { margin-top: 30px; border-top: 1px solid var(--paper-line); }
+.faq-list details { border-bottom: 1px solid var(--paper-line); }
+.faq-list summary {
+  list-style: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 20px 2px; font-weight: 600; font-size: 17px; color: var(--ink);
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: ''; flex-shrink: 0; width: 12px; height: 12px;
+  border-right: 2px solid #0B6640; border-bottom: 2px solid #0B6640;
+  transform: rotate(45deg) translateY(-3px); transition: transform .2s ease;
+}
+.faq-list details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.faq-list details p { padding: 0 2px 22px; color: var(--ink-soft); font-size: 16px; }
+
+/* ---------- Bloco 13: Chamada final ---------- */
+.final {
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 100%, #0A4A2F 0%, transparent 70%),
+    var(--night);
+}
+.final h2 { max-width: 20ch; margin: 0 auto 18px; }
+.final p { margin: 0 auto 32px; color: #D3DDD7; }
+.final .btn-note { margin-left: auto; margin-right: auto; }
+
+/* ---------- Rodapé ---------- */
+footer { background: #01110B; color: var(--mute); font-size: 13px; padding: 36px 0 110px; }
+@media (min-width: 900px) { footer { padding-bottom: 40px; } }
+footer .wrap { display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 760px) { footer .wrap { flex-direction: row; justify-content: space-between; } }
+footer a { color: var(--mute); }
+footer nav { display: flex; gap: 18px; }
+
+/* ---------- Barra fixa no celular ---------- */
+.sticky {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background: rgba(2,26,17,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(246,222,156,0.2);
+  display: flex; align-items: center; gap: 12px;
+  transform: translateY(110%); transition: transform .3s ease;
+}
+.sticky.show { transform: none; }
+.sticky .s-price { font-family: var(--serif); font-size: 22px; color: #fff; white-space: nowrap; }
+.sticky .s-price small { display: block; font-family: var(--sans); font-size: 11px; color: var(--mute); }
+.sticky .btn { flex: 1; min-height: 50px; padding: 12px 12px; font-size: 15px; white-space: nowrap; }
+.sticky .s-price { font-size: 20px; }
+@media (max-width: 400px) { .sticky .s-price small { display: none; } .sticky .btn { font-size: 14px; padding: 12px 10px; } }
+@media (min-width: 900px) { .sticky { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slot, .btn, .sticky { transition: none; }
+}
+
+/* ---------- Ajustes da primeira dobra no celular (sempre por último) ---------- */
+@media (max-width: 599px) {
+  .d-only { display: none; }
+  .m-only { display: inline; }
+  .hero { padding: 56px 0 56px; }
+  .hero .wrap { gap: 14px; }
+  .topbar .wrap { height: 56px; }
+  .hero .agenda { max-width: 280px; padding: 10px 12px 9px; border-radius: 12px; }
+  .hero .agenda-head { margin-bottom: 6px; align-items: center; }
+  .hero .agenda-title { font-size: 13px; }
+  .hero .agenda-sub, .hero .agenda-caption, .hero .lg-empty-item { display: none; }
+  .hero .agenda-count strong { font-size: 18px; display: inline; }
+  .hero .agenda-count span { font-size: 10px; margin-left: 3px; }
+  .hero .agenda-grid { grid-template-columns: 30px repeat(5, 1fr); gap: 3px; }
+  .hero .agenda-day { font-size: 9.5px; padding-bottom: 0; }
+  .hero .agenda-period { font-size: 9px; line-height: 9px; height: 9px; overflow: visible; }
+  .hero .agenda-gap { height: 3px; }
+  .hero .slot { height: 9px; border-radius: 3px; }
+  .hero .agenda-legend { margin-top: 7px; gap: 10px; font-size: 10px; }
+  .hero .agenda-legend i { width: 8px; height: 8px; margin-right: 4px; vertical-align: 0; }
+  .hero .product-name { font-size: 13px; letter-spacing: 0.1em; padding: 8px 16px 8px calc(16px + 0.1em); margin-bottom: 12px; white-space: nowrap; }
+  .hero h1 { font-size: 18px; line-height: 1.25; margin-bottom: 12px; max-width: none; }
+  .hero .lead { font-size: 16px; line-height: 1.45; margin-bottom: 18px; }
+  .hero .btn { min-height: 52px; padding: 14px 20px; }
+  .hero .btn-note { margin-top: 8px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== BLOCO 01 · PRIMEIRA DOBRA ===================== -->
+<section class="hero dark" id="topo">
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#topo" aria-label="Grupo Branches">
+        <span class="brand-logo" aria-hidden="true">GB</span>
+        <span class="brand-name">Grupo Branches</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <figure class="agenda" aria-label="Ilustração: agenda da semana de uma clínica com dois profissionais, com os horários vazios sendo preenchidos">
+      <div class="agenda-head">
+        <div>
+          <p class="agenda-title">Agenda da semana</p>
+          <p class="agenda-sub">2 profissionais, 2 consultas por período</p>
+        </div>
+        <div class="agenda-count" aria-live="polite">
+          <strong id="agendaCount">27</strong>
+          <span>de 40 horários</span>
+        </div>
+      </div>
+      <div class="agenda-grid" id="agendaGrid" aria-hidden="true"></div>
+    </figure>
+
+    <div class="hero-copy">
+      <p class="product-name">Missão Agenda Cheia</p>
+      <h1>Copie e cole o método que fez nossas clínicas parceiras dobrarem os agendamentos na mesma semana.</h1>
+      <p class="lead"><span class="d-only">Um treinamento prático para a sua recepção transformar mais mensagens em consultas agendadas, com playbook, scripts e uma planilha para você acompanhar os números.</span><span class="m-only">Treinamento prático para a recepção da sua clínica agendar mais, com playbook, scripts e planilha.</span></p>
+      <div class="hero-cta">
+        <a class="btn js-checkout" href="#checkout">Quero treinar minha recepção</a>
+        <p class="btn-note">R$ 47, acesso imediato e garantia de 7 dias</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== BLOCO 02 · O PROBLEMA ===================== -->
+<section class="problem on-paper pad">
+  <div class="wrap">
+    <div>
+      <h2>Os pacientes chegam. O problema está no que acontece depois.</h2>
+      <p>O WhatsApp da clínica recebe mensagens todos os dias: gente que viu o seu Instagram, que veio por indicação, que clicou no anúncio. Muitas dessas conversas terminam do mesmo jeito: o paciente pergunta o valor, recebe a resposta e some.</p>
+      <ul class="leaks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>A resposta demora, e o paciente agenda com quem respondeu primeiro.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3"/></svg>O preço chega antes do valor da consulta.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M9 12h.01M12 12h.01M15 12h.01"/></svg>O "vou ver e te aviso" fica sem retorno.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M10 14l4 4M14 14l-4 4"/></svg>O paciente agenda e não aparece.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 11a4 4 0 1 0-8 0M5 21a7 7 0 0 1 14 0"/><path d="M3 3l18 18"/></svg>Quem não agendou nunca mais recebe uma mensagem.</li>
+      </ul>
+    </div>
+
+    <div class="phone" role="img" aria-label="Exemplo de conversa no WhatsApp: o paciente pergunta o valor da avaliação, a clínica responde horas depois só com o preço, o paciente diz que vai pensar e ninguém volta a falar com ele.">
+      <div class="phone-bar">
+        <div class="phone-avatar">CL</div>
+        <div class="phone-who">Recepção da clínica<small>online</small></div>
+      </div>
+      <div class="chat">
+        <span class="chat-day">Hoje</span>
+        <div class="msg in">Oi! Quanto custa a avaliação?<time>09:12</time></div>
+        <div class="msg out">Olá! A avaliação custa R$ 350.<time>11:47</time></div>
+        <div class="msg in">Ah, ok. Vou ver e te aviso.<time>11:52</time></div>
+        <span class="chat-wait">Nenhuma mensagem depois disso.</span>
+      </div>
+      <p class="chat-end">Duas horas e meia para responder, o preço sem contexto e nenhum retorno. Essa conversa custou uma consulta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 03 · O CUSTO ===================== -->
+<section class="calc-section on-paper pad" id="calculadora">
+  <div class="wrap">
+    <div class="calc">
+      <div>
+        <h2>Faça a conta da sua agenda.</h2>
+        <p class="calc-intro">Ajuste os números para a sua clínica. A conta é simples: horários vazios vezes o valor de cada consulta.</p>
+
+        <div class="field">
+          <label for="cap">Consultas que a agenda comporta por mês <output id="capOut" for="cap">168</output></label>
+          <input type="range" id="cap" min="20" max="600" step="4" value="168">
+          <p class="hint">Uma clínica com 2 profissionais e 2 consultas por período comporta 168 por mês.</p>
+        </div>
+        <div class="field">
+          <label for="done">Consultas realizadas por mês <output id="doneOut" for="done">120</output></label>
+          <input type="range" id="done" min="0" max="600" step="2" value="120">
+        </div>
+        <div class="field">
+          <label for="price">Valor médio da consulta <output id="priceOut" for="price">R$ 400</output></label>
+          <input type="range" id="price" min="100" max="1500" step="10" value="400">
+        </div>
+      </div>
+
+      <div class="calc-result" aria-live="polite">
+        <p class="r-label">A agenda vazia custa à sua clínica</p>
+        <p class="r-money" id="rMoney">R$ 19.200</p>
+        <p class="r-per">por mês, só em consultas</p>
+        <hr>
+        <div class="r-row"><span>Horários vazios no mês</span><strong id="rEmpty">48</strong></div>
+        <div class="r-row"><span>Ocupação da agenda</span><strong id="rOcc">71%</strong></div>
+        <div class="r-row"><span>Em 12 meses</span><strong id="rYear">R$ 230.400</strong></div>
+        <p class="calc-note">Valores de exemplo; troque pelos da sua clínica. A conta não inclui os procedimentos que essas consultas trariam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 04 · A VIRADA ===================== -->
+<section class="turn forest pad">
+  <div class="wrap">
+    <h2>A sua recepção já é a sua equipe de vendas. Só falta treiná-la para isso.</h2>
+    <p>Toda clínica tem alguém que recebe o paciente, responde, explica e marca. Quando essa pessoa segue um processo e sabe conduzir a conversa, a mesma quantidade de mensagens vira mais consultas, sem aumentar o investimento em anúncio.</p>
+    <div class="turn-flow">
+      <div class="turn-step">
+        <p class="n">Primeiro</p>
+        <h3>Responder com método</h3>
+        <p>Tempo de resposta, primeiras mensagens e as perguntas certas.</p>
+      </div>
+      <div class="turn-step">
+        <p class="n">Depois</p>
+        <h3>Conduzir até a consulta</h3>
+        <p>Mostrar o valor antes do preço e responder às objeções.</p>
+      </div>
+      <div class="turn-step">
+        <p class="n">Sempre</p>
+        <h3>Confirmar e retomar</h3>
+        <p>Reduzir faltas e voltar a falar com quem não agendou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 05 · O QUE VOCÊ RECEBE + BLOCO 06 · BÔNUS ===================== -->
+<section class="dark pad" id="oferta">
+  <div class="wrap">
+    <div class="deliver-head narrow">
+      <h2>O que a sua clínica recebe</h2>
+      <p>Dois treinamentos em vídeo, curtos para a recepção aplicar no mesmo dia, cada um com um documento pronto para usar no balcão.</p>
+    </div>
+
+    <div class="deliver">
+      <article class="item">
+        <div class="pair">
+          <div class="mock-video"><span class="cap">Treinamento 1</span><span class="play"></span><span class="bar"></span></div>
+          <div class="mock-doc"><span class="t">Playbook da recepção</span><i></i><i class="s"></i><i class="g"></i><i></i><i class="s"></i></div>
+        </div>
+        <div>
+          <h3>Processo comercial da recepção</h3>
+          <p>O caminho do primeiro contato até a consulta: em quanto tempo responder, o que perguntar, quando voltar a falar com quem sumiu, como confirmar e como reativar quem não agendou.</p>
+          <span class="tag">Vídeo + playbook em documento</span>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="pair">
+          <div class="mock-video"><span class="cap">Treinamento 2</span><span class="play"></span><span class="bar"></span></div>
+          <div class="mock-doc"><span class="t">Scripts e objeções</span><i class="g"></i><i></i><i class="s"></i><i class="g"></i><i></i></div>
+        </div>
+        <div>
+          <h3>Método de condução da conversa</h3>
+          <p>Como entender o que o paciente procura, apresentar o valor da consulta antes do preço e responder a "tá caro", "vou pensar" e "vocês atendem convênio?" sem perder o agendamento.</p>
+          <span class="tag">Vídeo + scripts e guia de objeções</span>
+        </div>
+      </article>
+
+      <article class="item wide">
+        <div class="mock-sheet" aria-hidden="true">
+          <table>
+            <thead><tr><th>Semana</th><th>Contatos</th><th>Agendados</th><th>Presentes</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>64</td><td>22</td><td>18</td></tr>
+              <tr><td>2</td><td>58</td><td>24</td><td>21</td></tr>
+              <tr><td>3</td><td>61</td><td class="up">29</td><td class="up">26</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3>Planilha de gestão de resultados</h3>
+          <p>Contatos recebidos, agendamentos, comparecimentos e reativações, para você acompanhar a recepção em poucos minutos por semana. Ela registra números, nunca dados de pacientes.</p>
+          <span class="tag">Planilha pronta, com exemplo preenchido</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- BLOCO 06 · BÔNUS -->
+    <div class="bonus">
+      <div class="bonus-seal">Bônus<br>ao vivo</div>
+      <div>
+        <h3>Para o dono da clínica: webinário ao vivo com Gustavo Benedetti</h3>
+        <p>A recepção é uma peça do comercial da clínica. No webinário, você entende o sistema inteiro: de onde vêm os seus pacientes, onde as conversas se perdem e como a oferta da clínica influencia o fechamento. Acontece toda semana, ao vivo, e você escolhe a data depois da compra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 07 · PARA QUEM É ===================== -->
+<section class="on-paper pad">
+  <div class="wrap">
+    <h2 class="narrow">Feito para clínicas que já recebem pacientes e querem aproveitar melhor cada contato</h2>
+    <div class="fit">
+      <div class="fit-col fit-yes">
+        <h3>É para você se</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>A sua clínica atende particular e recebe pacientes pelo WhatsApp, Instagram ou telefone.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>A recepção agenda, mas você sente que muita conversa se perde no caminho.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Você quer acompanhar os números da recepção sem depender de achismo.</li>
+        </ul>
+      </div>
+      <div class="fit-col fit-no">
+        <h3>Não é para você se</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>A sua agenda já está lotada, com semanas de espera.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>A clínica ainda não recebe contatos de pacientes com frequência.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 08 · QUEM ENSINA ===================== -->
+<section class="forest pad">
+  <div class="wrap">
+    <div class="teacher">
+      <div class="portrait"><div><strong>GB</strong>Espaço para a foto do Gustavo</div></div>
+      <div>
+        <h2>Gustavo Benedetti, fundador do Grupo Branches</h2>
+        <p>Há mais de 5 anos, o Grupo Branches estrutura o comercial de empresas de serviço com a Configuração Comercial: canais de aquisição, processo comercial e oferta. O mesmo método está neste treinamento, adaptado à recepção de clínicas.</p>
+        <div class="cases">
+          <div class="case"><p class="from-to">R$ 20 mil para R$ 60 mil</p><p>por mês, em 3 meses</p></div>
+          <div class="case"><p class="from-to">R$ 200 mil para R$ 2,5 milhões</p><p>[prazo a confirmar]</p></div>
+          <div class="case"><p class="from-to">8 vezes mais resultado</p><p>com o mesmo investimento em tráfego, ajustando só o processo</p></div>
+        </div>
+        <p class="cases-note">Resultados de empresas de serviço atendidas pelo Grupo Branches. Cada negócio tem o seu ponto de partida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 09 · RESULTADO EM CLÍNICA =====================
+     Entra depois do piloto, com números reais e autorização do dono da clínica.
+-->
+
+<!-- ===================== BLOCO 10 · OFERTA + BLOCO 11 · GARANTIA ===================== -->
+<section class="dark pad" id="checkout-secao">
+  <div class="wrap">
+    <div class="offer">
+      <div>
+        <h2>Menos do que um único horário vazio na sua agenda</h2>
+        <p class="offer-intro">Uma consulta que deixa de acontecer custa mais do que o treinamento inteiro. A partir da primeira semana aplicando, a planilha mostra se a recepção está agendando mais.</p>
+      </div>
+
+      <div class="price-card">
+        <p class="pname">Missão Agenda Cheia</p>
+        <ul class="includes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Treinamento de processo comercial + playbook</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Treinamento de condução da conversa + scripts e guia de objeções</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Planilha de gestão de resultados</li>
+          <li class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Bônus: webinário ao vivo para o dono da clínica</li>
+        </ul>
+        <div class="price"><span class="cur">R$</span><span class="val">47</span><span class="once">pagamento único</span></div>
+        <p class="price-sub">Acesso imediato depois da confirmação do pagamento</p>
+        <a class="btn js-checkout" href="#checkout">Quero treinar minha recepção</a>
+        <div class="pay"><span>Pix</span><span>Cartão de crédito</span><span>Compra segura pela Cakto</span></div>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="g-badge"><div><strong>7</strong><span>dias</span></div></div>
+      <div>
+        <h3>Sete dias para conhecer o treinamento</h3>
+        <p>Assista, use os scripts com a sua recepção e, se não fizer sentido para a sua clínica, peça o reembolso dentro de 7 dias. Sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 12 · PERGUNTAS FREQUENTES ===================== -->
+<section class="on-paper pad">
+  <div class="wrap narrow">
+    <h2>Perguntas frequentes</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Quanto tempo dura o treinamento?</summary>
+        <p>[Duração total, a definir após a gravação.] Os vídeos são curtos, para a recepção assistir e aplicar no mesmo dia.</p>
+      </details>
+      <details>
+        <summary>Como recebo o acesso?</summary>
+        <p>Logo depois da confirmação do pagamento, por e-mail. No Pix, a confirmação costuma ser imediata.</p>
+      </details>
+      <details>
+        <summary>A recepcionista consegue fazer sozinha?</summary>
+        <p>Sim. O treinamento foi feito para ela assistir e aplicar. A planilha é para você acompanhar os resultados.</p>
+      </details>
+      <details>
+        <summary>Serve para a minha especialidade?</summary>
+        <p>O método vale para clínicas que agendam consultas e avaliações particulares, como estética, odontologia, dermatologia e outras especialidades.</p>
+      </details>
+      <details>
+        <summary>Quando é o webinário?</summary>
+        <p>Toda semana, ao vivo. Você escolhe a data depois da compra.</p>
+      </details>
+      <details>
+        <summary>Por quanto tempo tenho acesso?</summary>
+        <p>[Definir: 12 meses ou acesso vitalício.]</p>
+      </details>
+      <details>
+        <summary>Funciona para clínicas que atendem convênio?</summary>
+        <p>O método vale para qualquer agendamento, mas os maiores ganhos aparecem nos atendimentos particulares.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOCO 13 · CHAMADA FINAL ===================== -->
+<section class="final pad">
+  <div class="wrap">
+    <h2>Cada mensagem sem resposta é uma consulta a menos na sua agenda.</h2>
+    <p>Treine a sua recepção para transformar mais contatos em pacientes agendados.</p>
+    <a class="btn js-checkout" href="#checkout">Quero treinar minha recepção</a>
+    <p class="btn-note">R$ 47, acesso imediato e garantia de 7 dias</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Grupo Branches. [CNPJ]</p>
+    <nav aria-label="Links legais">
+      <a href="#">Política de privacidade</a>
+      <a href="#">Termos de uso</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Barra fixa no celular -->
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="s-price"><small>Missão Agenda Cheia</small>R$ 47</div>
+  <a class="btn js-checkout" href="#checkout" tabindex="-1">Quero treinar minha recepção</a>
+</div>
+
+<script>
+(function () {
+  var cfg = window.MAC_CONFIG || {};
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Links de compra e evento do pixel ---------- */
+  document.querySelectorAll('.js-checkout').forEach(function (a) {
+    a.setAttribute('href', cfg.checkoutUrl || '#checkout');
+    a.addEventListener('click', function () {
+      if (typeof window.fbq === 'function') {
+        var id = 'mac_ic_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+        window.fbq('track', 'InitiateCheckout', { value: 47, currency: 'BRL', content_name: 'Missão Agenda Cheia' }, { eventID: id });
+      }
+    });
+  });
+
+  /* ---------- Agenda da semana ---------- */
+  var grid = document.getElementById('agendaGrid');
+  var countEl = document.getElementById('agendaCount');
+  var days = ['SEG', 'TER', 'QUA', 'QUI', 'SEX'];
+  // Cor única dos compromissos: o azul padrão de eventos do Google Agenda
+  var colors = ['#039BE5'];
+  // 8 horários por dia (4 de manhã, 4 à tarde). 1 = já agendado, 0 = vazio.
+  var start = [
+    [1,0,1,1, 1,1,0,1],
+    [1,1,0,1, 0,1,1,0],
+    [0,1,1,1, 1,0,1,1],
+    [1,1,1,0, 1,1,0,0],
+    [1,0,1,1, 0,1,0,0]
+  ];
+  var empties = [];
+  var k = 0;
+  function colorFor() { return colors[0]; }
+  grid.appendChild(document.createElement('span'));
+  days.forEach(function (d) { var s = document.createElement('span'); s.className = 'agenda-day'; s.textContent = d; grid.appendChild(s); });
+  for (var row = 0; row < 8; row++) {
+    if (row === 4) { var g = document.createElement('span'); g.className = 'agenda-gap'; grid.appendChild(g); }
+    var lab = document.createElement('span');
+    lab.className = 'agenda-period';
+    lab.textContent = row === 0 ? 'Manhã' : (row === 4 ? 'Tarde' : '');
+    grid.appendChild(lab);
+    for (var day = 0; day < 5; day++) {
+      var c = document.createElement('span');
+      c.className = 'slot';
+      var n = day * 8 + row;
+      if (start[day][row]) { c.classList.add('filled'); c.style.background = colorFor(n); }
+      else { empties.push({ el: c, color: colorFor(n) }); }
+      grid.appendChild(c);
+    }
+  }
+  var filled = 40 - empties.length;
+  countEl.textContent = filled;
+
+  function fillAll() {
+    empties.forEach(function (e) { e.el.style.background = e.color; });
+    countEl.textContent = 40;
+  }
+  function resetAll() {
+    empties.forEach(function (e) { e.el.style.background = ''; });
+    filled = 40 - empties.length;
+    countEl.textContent = filled;
+  }
+
+  // Ciclo contínuo: preenche os horários vazios, segura a agenda cheia, esvazia e recomeça.
+  // Pausa quando a agenda sai da tela ou a aba fica em segundo plano (economiza bateria no celular).
+  var STEP = 170, HOLD = 2200, GAP = 900;
+  var visible = false, running = false, timer = null, i = 0, phase = 'fill';
+  function tick() {
+    if (!visible || document.hidden) { running = false; return; }
+    running = true;
+    if (phase === 'fill') {
+      if (i < empties.length) {
+        var e = empties[i];
+        e.el.style.background = e.color;
+        e.el.classList.add('pop');
+        setTimeout(function () { e.el.classList.remove('pop'); }, 300);
+        filled++; countEl.textContent = filled; i++;
+        timer = setTimeout(tick, STEP);
+      } else {
+        phase = 'hold'; timer = setTimeout(tick, HOLD);
+      }
+    } else if (phase === 'hold') {
+      resetAll(); i = 0; phase = 'gap'; timer = setTimeout(tick, GAP);
+    } else {
+      phase = 'fill'; timer = setTimeout(tick, STEP);
+    }
+  }
+  function startLoop() { if (!running && visible && !document.hidden) { clearTimeout(timer); timer = setTimeout(tick, 500); running = true; } }
+
+  if (reduce) { fillAll(); }
+  else if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) startLoop(); else { clearTimeout(timer); running = false; }
+    }, { threshold: 0.2 }).observe(grid);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { clearTimeout(timer); running = false; } else startLoop();
+    });
+  } else { visible = true; startLoop(); }
+
+  /* ---------- Calculadora ---------- */
+  var cap = document.getElementById('cap'), done = document.getElementById('done'), price = document.getElementById('price');
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  function calc() {
+    var c = +cap.value, d = +done.value, p = +price.value;
+    if (d > c) { d = c; done.value = c; }
+    done.max = Math.max(c, 0);
+    var empty = c - d;
+    document.getElementById('capOut').textContent = c;
+    document.getElementById('doneOut').textContent = d;
+    document.getElementById('priceOut').textContent = brl.format(p);
+    document.getElementById('rEmpty').textContent = empty;
+    document.getElementById('rOcc').textContent = (c ? Math.round(d / c * 100) : 0) + '%';
+    document.getElementById('rMoney').textContent = brl.format(empty * p);
+    document.getElementById('rYear').textContent = brl.format(empty * p * 12);
+  }
+  [cap, done, price].forEach(function (el) { el.addEventListener('input', calc); });
+  calc();
+
+  /* ---------- Barra fixa no celular (aparece depois da primeira dobra) ---------- */
+  var sticky = document.getElementById('sticky');
+  var hero = document.getElementById('topo');
+  var finalSec = document.querySelector('.final');
+  if ('IntersectionObserver' in window) {
+    var heroVisible = true, finalVisible = false;
+    function update() {
+      var show = !heroVisible && !finalVisible;
+      sticky.classList.toggle('show', show);
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+      sticky.querySelector('a').setAttribute('tabindex', show ? '0' : '-1');
+    }
+    new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; update(); }, { threshold: 0.05 }).observe(hero);
+    new IntersectionObserver(function (e) { finalVisible = e[0].isIntersecting; update(); }, { threshold: 0.2 }).observe(finalSec);
+  }
+})();
+</script>
+</body>
+</html>
