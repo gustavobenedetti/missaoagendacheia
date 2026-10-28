@@ -374,6 +374,10 @@ section { position: relative; }
 .vanish-sec:not(.inview) .v-inbox, .vanish-sec:not(.inview) .v-bub, .vanish-sec:not(.inview) .v-floor { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .v-inbox, .v-bub, .v-floor { animation: none; } }
 
+/* celular menor, mantendo as proporções da tela */
+.v-inbox { zoom: 0.7; }
+@media (max-width: 420px) { .v-inbox { zoom: 0.72; } }
+
 /* Por que somem */
 .v-why { width: 100%; max-width: 560px; }
 .v-why h3 { font-family: var(--sans); font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--royal-2); margin-bottom: 12px; }
