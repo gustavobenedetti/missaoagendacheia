@@ -279,9 +279,9 @@ section { position: relative; }
 .v-batt::after { content: ''; position: absolute; right: -4px; top: 2.5px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: #111B21; }
 .v-batt i { display: block; height: 100%; width: 72%; background: #111B21; border-radius: 1px; }
 .v-top { display: flex; justify-content: space-between; align-items: center; padding: 6px 16px 8px; }
-.v-brand { font-size: 23px; font-weight: 700; color: #1DAA61; letter-spacing: -0.01em; }
-.v-acts { display: flex; gap: 18px; color: #111B21; }
-.v-acts svg { width: 22px; height: 22px; }
+.v-brand { font-size: 19px; font-weight: 700; color: #1DAA61; letter-spacing: -0.01em; }
+.v-acts { display: flex; gap: 16px; color: #111B21; }
+.v-acts svg { width: 20px; height: 20px; }
 .v-search { display: flex; align-items: center; gap: 10px; margin: 0 14px 10px; padding: 9px 14px; border-radius: 22px; background: #F0F2F5; color: #667781; font-size: 14.5px; }
 .v-search svg { width: 18px; height: 18px; }
 .v-chips { display: flex; gap: 6px; padding: 0 14px 6px; overflow: hidden; }
@@ -362,7 +362,6 @@ section { position: relative; }
 }
 @media (max-width: 420px) {
   .v-scene { inset: -10px 0 0; }
-  .v-inbox { max-width: 286px; }
   .v-bub { display: none; }
   .v-tabs span { font-size: 9.5px; }
   .v-tabs b { width: 46px; height: 28px; }
@@ -375,8 +374,8 @@ section { position: relative; }
 @media (prefers-reduced-motion: reduce) { .v-inbox, .v-bub, .v-floor { animation: none; } }
 
 /* celular menor, mantendo as proporções da tela */
-.v-inbox { zoom: 0.7; }
-@media (max-width: 420px) { .v-inbox { zoom: 0.72; } }
+/* proporção real de um celular (cerca de 1 : 2,05), só reduzida na escala */
+.v-inbox { width: 322px; max-width: none; zoom: 0.72; }
 
 /* Por que somem */
 .v-why { width: 100%; max-width: 560px; }
