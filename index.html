@@ -188,7 +188,7 @@ section { position: relative; }
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
 }
-.hero h1 { font-family: var(--sans); font-weight: 800; font-size: clamp(20px, 4.4vw, 30px); line-height: 1.18; letter-spacing: 0.005em; text-transform: uppercase; margin-bottom: 24px; text-wrap: balance; color: #fff; max-width: 26ch; }
+.hero h1 { font-family: var(--sans); font-weight: 800; font-size: clamp(20px, 4.4vw, 30px); line-height: 1.18; letter-spacing: 0.005em; text-transform: uppercase; margin-bottom: 36px; text-wrap: balance; color: #fff; max-width: 26ch; }
 @media (min-width: 960px) { .hero h1 { max-width: 40ch; } }
 .hero h1 .gold {
   display: block;
@@ -257,18 +257,19 @@ section { position: relative; }
 .seam.s1 { height: 96px; }
 @media (min-width: 900px) { .seam.s1 { height: 140px; } }
 /* Sessão 02 → 03: mesmo encaixe da 01 → 02 */
-.vanish-sec.pad { padding-bottom: 12px; }
-@media (min-width: 900px) { .vanish-sec.pad { padding-bottom: 28px; } }
-.seam.s2 { height: 120px; }
-@media (min-width: 900px) { .seam.s2 { height: 180px; } }
+/* a sombra do card precisa terminar antes da borda da seção (senão ela é cortada e vira uma linha) */
+.vanish-sec.pad { padding-bottom: 64px; }
+@media (min-width: 900px) { .vanish-sec.pad { padding-bottom: 80px; } }
+.seam.s2 { height: 110px; }
+@media (min-width: 900px) { .seam.s2 { height: 150px; } }
 .turn.pad { padding-top: 12px; }
 @media (min-width: 900px) { .turn.pad { padding-top: 28px; } }
 .vanish-sec .wrap { display: grid; gap: 20px; justify-items: center; text-align: center; }
 @media (min-width: 960px) { .vanish-sec .wrap { gap: 44px; } }
-.v-head h2 { margin-bottom: 10px; }
+.v-head h2 { margin-bottom: 4px; }
 .v-head { max-width: 760px; }
-.v-head h2 { margin-left: auto; margin-right: auto; font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(21px, 5.6vw, 34px); line-height: 1.18; max-width: 22ch; padding-top: 0.12em; }
-.v-head p { color: var(--ink-soft); font-size: 17px; margin: 0 auto; }
+.v-head h2 { margin-left: auto; margin-right: auto; font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(17px, 5.3vw, 34px); line-height: 1.18; max-width: none; white-space: nowrap; padding-top: 0.12em; }
+.v-head p { color: var(--ink-soft); font-size: 17px; line-height: 1.28; margin: 0 auto; }
 
 /* Caixa de entrada */
 .v-inbox {
@@ -771,6 +772,33 @@ footer nav { display: flex; gap: 18px; }
 /* o brilho e a grade da Sessão 01 se apagam antes da emenda, para o degradê começar sem linha */
 .hero-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 220px; z-index: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(2,26,17,0) 0%, rgba(2,26,17,0.55) 45%, rgba(2,26,17,0.9) 75%, #021A11 100%); }
+
+/* ---------- Por que os leads somem: um card só ---------- */
+.why-card { position: relative; z-index: 2; width: 100%; max-width: 560px; overflow: hidden; text-align: left; border-radius: 20px; background: #fff;
+  border: 1px solid var(--paper-line); box-shadow: 0 16px 36px rgba(10,42,29,0.10); }
+.wy-title { padding: 24px 22px 6px; text-align: center; font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em;
+  font-size: 22px; line-height: 1.15; color: var(--ink); }
+.wy-list { list-style: none; padding: 6px 22px 8px; }
+.wy-row { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; padding: 16px 0; }
+.wy-row + .wy-row { border-top: 1px solid #E4EBE5; }
+.wy-ic { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--alert); background: #FBEDE8; }
+.wy-ic svg { width: 22px; height: 22px; }
+.wy-txt strong { display: block; font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+.wy-txt span { display: block; font-size: 15px; color: var(--ink-soft); line-height: 1.35; margin-top: 2px; }
+.wy-end { padding: 22px 22px 24px; text-align: center; background: #B3261E; }
+.wy-verdict { margin: 0 auto; max-width: 24ch; font-family: var(--sans); font-weight: 800; text-transform: uppercase; font-size: 19px; line-height: 1.2; color: #fff; text-wrap: balance; }
+.wy-good { margin: 10px auto 0; font-size: 14.5px; line-height: 1.4; color: var(--gold-light); text-wrap: balance; }
+@media (min-width: 960px) { .wy-title { font-size: 26px; padding-top: 30px; } .wy-list { padding: 8px 32px 10px; } .wy-end { padding: 26px 32px 28px; } .wy-verdict { font-size: 22px; } }
+
+/* pulso discreto nos botões de compra: um halo verde que se abre e some, sem mexer no tamanho do botão */
+.btn.js-checkout { animation: btnPulse 2.8s ease-out infinite; }
+@keyframes btnPulse {
+  0%   { box-shadow: 0 8px 22px rgba(0,0,0,0.28), 0 0 26px rgba(23,137,90,0.32), inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 0 rgba(29,170,97,0.45); }
+  70%  { box-shadow: 0 8px 22px rgba(0,0,0,0.28), 0 0 26px rgba(23,137,90,0.32), inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 12px rgba(29,170,97,0); }
+  100% { box-shadow: 0 8px 22px rgba(0,0,0,0.28), 0 0 26px rgba(23,137,90,0.32), inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 0 rgba(29,170,97,0); }
+}
+.btn.js-checkout:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .btn.js-checkout { animation: none; } }
 /* ---------- Ajustes da primeira dobra no celular (sempre por último) ---------- */
 @media (max-width: 599px) {
   .d-only { display: none; }
@@ -778,24 +806,24 @@ footer nav { display: flex; gap: 18px; }
   .hero { padding: 136px 0 0; }
   .hero .wrap { gap: 14px; }
   .topbar .wrap { height: 56px; }
-  .hero .agenda { max-width: 310px; padding: 14px 15px 13px; border-radius: 16px; margin-bottom: 14px; }
+  .hero .agenda { max-width: 286px; padding: 13px 14px 12px; border-radius: 15px; margin-bottom: 14px; }
   .hero .agenda-head { margin-bottom: 6px; align-items: center; }
-  .hero .agenda-title { font-size: 14.5px; white-space: nowrap; }
+  .hero .agenda-title { font-size: 13.5px; white-space: nowrap; }
   .hero .agenda-head { gap: 8px; }
   .hero .agenda-count { white-space: nowrap; }
   .hero .agenda-sub, .hero .agenda-caption, .hero .lg-empty-item { display: none; }
-  .hero .agenda-count strong { font-size: 21px; display: inline; }
+  .hero .agenda-count strong { font-size: 19px; display: inline; }
   .hero .agenda-count span { display: none; }
   .hero .agenda-count strong::after { content: ' de 40'; font-family: var(--sans); font-size: 12px; font-weight: 500; color: #70757A; }
-  .hero .agenda-grid { grid-template-columns: 38px repeat(5, 1fr); gap: 5px; }
+  .hero .agenda-grid { grid-template-columns: 35px repeat(5, 1fr); gap: 4.5px; }
   .hero .agenda-day { font-size: 11px; padding-bottom: 2px; }
   .hero .agenda-period { font-size: 10.5px; line-height: 10px; height: 10px; overflow: visible; }
   .hero .agenda-gap { height: 3px; }
-  .hero .slot { height: 10px; border-radius: 3px; }
+  .hero .slot { height: 9px; border-radius: 3px; }
   .hero .agenda-legend { margin-top: 7px; gap: 10px; font-size: 10px; }
   .hero .agenda-legend i { width: 8px; height: 8px; margin-right: 4px; vertical-align: 0; }
   .hero .product-name { font-size: 24px; letter-spacing: 0.06em; padding-left: 0.06em; margin-top: 4px; margin-bottom: 8px; }
-  .hero h1 { font-size: 18px; line-height: 1.25; margin-bottom: 12px; max-width: none; }
+  .hero h1 { font-size: 18px; line-height: 1.25; margin-bottom: 22px; max-width: none; }
   .hero .lead { font-size: 16px; line-height: 1.3; margin-bottom: 18px; }
   .hero .btn { min-height: 46px; padding: 12px 22px; font-size: 14px; }
   .hero .btn-note { margin-top: 8px; font-size: 13px; }
@@ -848,8 +876,8 @@ footer nav { display: flex; gap: 18px; }
 <section class="vanish-sec on-paper pad fx-light">
   <div class="wrap">
     <div class="v-head">
-      <h2>Você recebe clientes no WhatsApp e eles somem?</h2>
-      <p>A conversa começa bem. E termina assim:</p>
+      <h2>Você recebe clientes<br>no WhatsApp e eles somem?</h2>
+      <p>As conversas começam bem,<br>mas terminam assim:</p>
     </div>
 
     <div class="v-phone-wrap">
@@ -886,20 +914,17 @@ footer nav { display: flex; gap: 18px; }
       </div>
     </div>
     </div>
-    <p class="v-alert"><strong>Todas lidas.</strong> Nenhuma respondida.</p>
     </div>
 
-    <div class="v-why">
-      <h3>Por que eles somem</h3>
-      <ul class="v-reasons">
-        <li><span class="v-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><strong>A resposta demora</strong><span class="r-sub">Quem responde primeiro, agenda primeiro.</span></span></li>
-        <li><span class="v-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3"/></svg></span><span><strong>O preço vem sozinho</strong><span class="r-sub">Sem mostrar o valor, o preço assusta.</span></span></li>
-        <li><span class="v-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></span><span><strong>Ninguém retoma</strong><span class="r-sub">O "vou pensar" fica sem resposta.</span></span></li>
+    <div class="why-card">
+      <h3 class="wy-title">Por que os leads somem?</h3>
+      <ul class="wy-list">
+          <li class="wy-row"><span class="wy-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="wy-txt"><strong>A resposta demora</strong><span>Quem responde primeiro, agenda primeiro.</span></span></li>
+          <li class="wy-row"><span class="wy-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3"/></svg></span><span class="wy-txt"><strong>O preço vem sozinho</strong><span>Sem mostrar o valor, o preço assusta.</span></span></li>
+          <li class="wy-row"><span class="wy-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></span><span class="wy-txt"><strong>Ninguém retoma</strong><span>O "vou pensar" fica sem resposta.</span></span></li>
       </ul>
-      <div class="v-punch">
-        <p class="vp-main"><span class="vp-a">Eles não desistiram.</span><span class="vp-b">Agendaram com quem quis vender, não só atender.</span></p>
-        <span class="vp-rule" aria-hidden="true"></span>
-        <p class="vp-good"><span><strong>A boa notícia:</strong> isso se corrige com processo.</span></p>
+      <div class="wy-end">
+        <p class="wy-verdict">O problema é a falta de um processo validado.</p>
       </div>
     </div>
   </div>
