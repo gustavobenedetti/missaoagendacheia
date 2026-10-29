@@ -150,7 +150,7 @@ section { position: relative; }
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 88px 0 72px;
+  padding: 88px 0 10px;
   background: var(--night);
   overflow: hidden;
 }
@@ -175,7 +175,7 @@ section { position: relative; }
 .hero .agenda-caption { margin-top: 6px; font-size: 11px; }
 .m-only { display: none; }
 @media (min-width: 960px) {
-  .hero { padding: 112px 0 64px; }
+  .hero { padding: 112px 0 4px; }
   .hero .wrap { gap: 40px; }
 }
 .product-name {
@@ -252,10 +252,10 @@ section { position: relative; }
 
 /* ---------- Bloco 02: Eles somem ---------- */
 /* o degradê acima já dá o respiro: a seção começa colada nele */
-.vanish-sec.pad { padding-top: 8px; }
-@media (min-width: 900px) { .vanish-sec.pad { padding-top: 24px; } }
-.seam.s1 { height: 120px; }
-@media (min-width: 900px) { .seam.s1 { height: 180px; } }
+.vanish-sec.pad { padding-top: 6px; }
+@media (min-width: 900px) { .vanish-sec.pad { padding-top: 6px; } }
+.seam.s1 { height: 96px; }
+@media (min-width: 900px) { .seam.s1 { height: 140px; } }
 /* Sessão 02 → 03: mesmo encaixe da 01 → 02 */
 .vanish-sec.pad { padding-bottom: 12px; }
 @media (min-width: 900px) { .vanish-sec.pad { padding-bottom: 28px; } }
@@ -267,7 +267,7 @@ section { position: relative; }
 @media (min-width: 960px) { .vanish-sec .wrap { gap: 44px; } }
 .v-head h2 { margin-bottom: 10px; }
 .v-head { max-width: 760px; }
-.v-head h2 { margin-left: auto; margin-right: auto; font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(21px, 5.6vw, 34px); line-height: 1.18; max-width: 22ch; }
+.v-head h2 { margin-left: auto; margin-right: auto; font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(21px, 5.6vw, 34px); line-height: 1.18; max-width: 22ch; padding-top: 0.12em; }
 .v-head p { color: var(--ink-soft); font-size: 17px; margin: 0 auto; }
 
 /* Caixa de entrada */
@@ -399,11 +399,18 @@ section { position: relative; }
 .v-ic svg { width: 21px; height: 21px; }
 .v-reasons strong { display: block; font-size: 16px; color: var(--ink); line-height: 1.25; }
 .v-reasons .r-sub { display: block; font-size: 14px; color: var(--ink-soft); line-height: 1.35; }
-.v-punch { margin-top: 18px; padding: 18px 18px; border-radius: 14px; background: var(--ink); color: #fff;
-  font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: 17px; line-height: 1.25; text-align: center; }
-.v-punch small { text-transform: none; letter-spacing: 0; }
-.v-punch small { display: block; margin-top: 6px; font-family: var(--sans); font-weight: 500; font-size: 14px; color: var(--gold-light); }
-@media (min-width: 960px) { .v-punch { font-size: 20px; } }
+.v-punch {
+  margin-top: 22px; padding: 28px 22px 24px; border-radius: 16px; text-align: center; color: #fff;
+  background: #062A1B; border: 1px solid rgba(246,222,156,0.28);
+  box-shadow: 0 18px 40px rgba(10,42,29,0.22);
+}
+.vp-main { margin: 0 auto; max-width: none; font-family: var(--sans); font-weight: 800; text-transform: uppercase; line-height: 1.14; }
+.vp-a { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+.vp-b { display: block; font-size: 22px; letter-spacing: 0.005em; color: #fff; text-wrap: balance; }
+.vp-rule { display: block; width: 40px; height: 2px; margin: 18px auto 16px; border-radius: 2px; background: var(--gold); }
+.vp-good { margin: 0 auto; max-width: none; font-size: 15px; line-height: 1.4; color: rgba(255,255,255,0.78); text-wrap: balance; }
+.vp-good strong { color: var(--gold-light); font-weight: 700; }
+@media (min-width: 960px) { .v-punch { padding: 34px 40px 28px; } .vp-b { font-size: 27px; } .vp-good { font-size: 16px; } }
 @media (prefers-reduced-motion: reduce) { .v-tick { animation: none; color: #53BDEB; } .v-typing, .v-row, .v-av, .v-name, .v-mtext, .v-time, .v-lost { animation: none; } }
 
 /* ---------- Bloco 04: Virada ---------- */
@@ -751,36 +758,40 @@ footer nav { display: flex; gap: 18px; }
 
 
 /* ---------- Degradê entre as seções (verde ↔ claro, curva suave) ---------- */
-.seam { display: block; height: 160px; margin: -1px 0; position: relative; z-index: 1; pointer-events: none; }
+.seam { display: block; height: 160px; margin: -1px 0; position: relative; z-index: 0; pointer-events: none; }
 @media (min-width: 900px) { .seam { height: 240px; } }
-.seam.s1 { background: linear-gradient(180deg, rgb(2,26,17) 0.0%, rgb(6,30,21) 8.3%, rgb(18,41,32) 16.7%, rgb(37,58,50) 25.0%, rgb(62,81,73) 33.3%, rgb(91,108,100) 41.7%, rgb(122,136,130) 50.0%, rgb(154,164,159) 58.3%, rgb(183,191,186) 66.7%, rgb(208,214,209) 75.0%, rgb(227,231,227) 83.3%, rgb(239,242,238) 91.7%, rgb(243,246,242) 100.0%); }
+.seam.s1 { background: radial-gradient(ellipse 260% 100% at 50% 0%, rgb(2,26,17) 0%, rgb(2,26,17) 12%, rgb(5,29,20) 18.3%, rgb(14,37,28) 24.6%, rgb(28,50,42) 30.9%, rgb(47,67,59) 37.1%, rgb(70,88,81) 43.4%, rgb(96,112,104) 49.7%, rgb(122,136,130) 56.0%, rgb(149,160,155) 62.3%, rgb(175,184,178) 68.6%, rgb(198,205,200) 74.9%, rgb(217,222,217) 81.1%, rgb(231,235,231) 87.4%, rgb(240,243,239) 93.7%, rgb(243,246,242) 100.0%), rgb(243,246,242); }
 .seam.s2 { background: linear-gradient(180deg, rgb(226,234,227) 0.0%, rgb(222,231,224) 8.3%, rgb(211,221,214) 16.7%, rgb(194,205,198) 25.0%, rgb(171,185,177) 33.3%, rgb(144,161,153) 41.7%, rgb(116,136,127) 50.0%, rgb(87,111,100) 58.3%, rgb(60,87,76) 66.7%, rgb(37,67,55) 75.0%, rgb(20,51,39) 83.3%, rgb(9,41,29) 91.7%, rgb(5,38,26) 100.0%); }
 .seam.s3 { background: linear-gradient(180deg, rgb(1,15,9) 0.0%, rgb(5,19,13) 8.3%, rgb(17,30,25) 16.7%, rgb(36,49,43) 25.0%, rgb(61,73,67) 33.3%, rgb(91,101,95) 41.7%, rgb(122,130,125) 50.0%, rgb(153,160,156) 58.3%, rgb(182,188,184) 66.7%, rgb(208,212,208) 75.0%, rgb(227,231,226) 83.3%, rgb(239,242,238) 91.7%, rgb(243,246,242) 100.0%); }
 .seam.s4 { background: linear-gradient(180deg, rgb(226,234,227) 0.0%, rgb(222,231,224) 8.3%, rgb(211,221,214) 16.7%, rgb(194,205,198) 25.0%, rgb(171,185,177) 33.3%, rgb(144,161,153) 41.7%, rgb(116,136,127) 50.0%, rgb(87,111,100) 58.3%, rgb(60,87,76) 66.7%, rgb(37,67,55) 75.0%, rgb(20,51,39) 83.3%, rgb(9,41,29) 91.7%, rgb(5,38,26) 100.0%); }
 .seam.s5 { background: linear-gradient(180deg, rgb(2,26,17) 0.0%, rgb(6,30,21) 8.3%, rgb(18,41,32) 16.7%, rgb(37,58,50) 25.0%, rgb(62,81,73) 33.3%, rgb(91,108,100) 41.7%, rgb(122,136,130) 50.0%, rgb(154,164,159) 58.3%, rgb(183,191,186) 66.7%, rgb(208,214,209) 75.0%, rgb(227,231,227) 83.3%, rgb(239,242,238) 91.7%, rgb(243,246,242) 100.0%); }
 .seam.s6 { background: linear-gradient(180deg, rgb(226,234,227) 0.0%, rgb(222,230,223) 8.3%, rgb(211,220,213) 16.7%, rgb(193,204,196) 25.0%, rgb(170,182,174) 33.3%, rgb(143,157,149) 41.7%, rgb(114,130,122) 50.0%, rgb(85,103,95) 58.3%, rgb(58,78,70) 66.7%, rgb(35,56,48) 75.0%, rgb(17,40,31) 83.3%, rgb(6,30,21) 91.7%, rgb(2,26,17) 100.0%); }
 
+
+/* o brilho e a grade da Sessão 01 se apagam antes da emenda, para o degradê começar sem linha */
+.hero-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 220px; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(2,26,17,0) 0%, rgba(2,26,17,0.55) 45%, rgba(2,26,17,0.9) 75%, #021A11 100%); }
 /* ---------- Ajustes da primeira dobra no celular (sempre por último) ---------- */
 @media (max-width: 599px) {
   .d-only { display: none; }
   .m-only { display: inline; }
-  .hero { padding: 56px 0 28px; }
+  .hero { padding: 136px 0 0; }
   .hero .wrap { gap: 14px; }
   .topbar .wrap { height: 56px; }
-  .hero .agenda { max-width: 210px; padding: 9px 10px 8px; border-radius: 12px; }
+  .hero .agenda { max-width: 264px; padding: 12px 13px 11px; border-radius: 14px; }
   .hero .agenda-head { margin-bottom: 6px; align-items: center; }
-  .hero .agenda-title { font-size: 11px; white-space: nowrap; }
+  .hero .agenda-title { font-size: 13px; white-space: nowrap; }
   .hero .agenda-head { gap: 8px; }
   .hero .agenda-count { white-space: nowrap; }
   .hero .agenda-sub, .hero .agenda-caption, .hero .lg-empty-item { display: none; }
-  .hero .agenda-count strong { font-size: 15px; display: inline; }
+  .hero .agenda-count strong { font-size: 18px; display: inline; }
   .hero .agenda-count span { display: none; }
-  .hero .agenda-count strong::after { content: ' de 40'; font-family: var(--sans); font-size: 9.5px; font-weight: 500; color: #70757A; }
-  .hero .agenda-grid { grid-template-columns: 26px repeat(5, 1fr); gap: 3px; }
-  .hero .agenda-day { font-size: 8.5px; padding-bottom: 0; }
-  .hero .agenda-period { font-size: 8px; line-height: 6px; height: 6px; overflow: visible; }
+  .hero .agenda-count strong::after { content: ' de 40'; font-family: var(--sans); font-size: 11px; font-weight: 500; color: #70757A; }
+  .hero .agenda-grid { grid-template-columns: 32px repeat(5, 1fr); gap: 4px; }
+  .hero .agenda-day { font-size: 10px; padding-bottom: 1px; }
+  .hero .agenda-period { font-size: 9.5px; line-height: 8px; height: 8px; overflow: visible; }
   .hero .agenda-gap { height: 3px; }
-  .hero .slot { height: 6px; border-radius: 3px; }
+  .hero .slot { height: 8px; border-radius: 3px; }
   .hero .agenda-legend { margin-top: 7px; gap: 10px; font-size: 10px; }
   .hero .agenda-legend i { width: 8px; height: 8px; margin-right: 4px; vertical-align: 0; }
   .hero .product-name { font-size: 24px; letter-spacing: 0.06em; padding-left: 0.06em; margin-top: 4px; margin-bottom: 8px; }
@@ -795,6 +806,7 @@ footer nav { display: flex; gap: 18px; }
 
 <!-- ===================== BLOCO 01 · PRIMEIRA DOBRA ===================== -->
 <section class="hero dark fx" id="topo">
+  <div class="hero-fade" aria-hidden="true"></div>
   <header class="topbar">
     <div class="wrap">
       <a class="brand" href="#topo" aria-label="Configuração Comercial, Grupo Branches">
@@ -884,7 +896,11 @@ footer nav { display: flex; gap: 18px; }
         <li><span class="v-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3"/></svg></span><span><strong>O preço vem sozinho</strong><span class="r-sub">Sem mostrar o valor, o preço assusta.</span></span></li>
         <li><span class="v-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></span><span><strong>Ninguém retoma</strong><span class="r-sub">O "vou pensar" fica sem resposta.</span></span></li>
       </ul>
-      <p class="v-punch">Eles não desistiram. Agendaram com quem respondeu melhor.<small>A boa notícia: isso se corrige com processo.</small></p>
+      <div class="v-punch">
+        <p class="vp-main"><span class="vp-a">Eles não desistiram.</span><span class="vp-b">Agendaram com quem quis vender, não só atender.</span></p>
+        <span class="vp-rule" aria-hidden="true"></span>
+        <p class="vp-good"><span><strong>A boa notícia:</strong> isso se corrige com processo.</span></p>
+      </div>
     </div>
   </div>
 </section>
