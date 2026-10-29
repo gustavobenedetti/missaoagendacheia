@@ -834,8 +834,8 @@ footer nav { display: flex; gap: 18px; }
 .sol-steps { list-style: none; width: 100%; max-width: 560px; display: grid; gap: 10px; text-align: left; }
 .sol-steps li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px;
   background: rgba(255,255,255,0.05); border: 1px solid rgba(246,222,156,0.18); }
-.sol-n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--sans); font-weight: 800; font-size: 15px;
-  color: #031A11; background: var(--gold); }
+.sol-n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: #1DAA61; box-shadow: 0 0 0 4px rgba(29,170,97,0.18); }
+.sol-n svg { width: 18px; height: 18px; }
 .sol-steps strong { display: block; font-size: 15.5px; font-weight: 700; color: #fff; line-height: 1.25; }
 .sol-steps li > span:last-child > span { display: block; font-size: 13.5px; color: rgba(255,255,255,0.68); line-height: 1.35; margin-top: 1px; }
 .sol-cta { padding-top: 4px; }
@@ -844,9 +844,63 @@ footer nav { display: flex; gap: 18px; }
   .sol-compare { gap: 16px; }
   .sol-side { padding: 16px 14px; gap: 9px; }
   .sol-bubble { font-size: 14px; padding: 8px 10px; }
-  .sol-steps { grid-template-columns: repeat(3, 1fr); max-width: 880px; }
+  .sol-steps { grid-template-columns: repeat(4, 1fr); max-width: 960px; }
   .sol-steps li { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 18px 14px; }
 }
+
+/* ---------- Sessão 03: linha do tempo atende × vende ---------- */
+.sol-head h2 { white-space: nowrap; max-width: none !important; font-size: clamp(16px, 5.6vw, 34px) !important; margin-bottom: 0 !important; }
+.tl { width: 100%; max-width: 480px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tl-col { display: flex; flex-direction: column; align-items: center; }
+.tl-label { font-family: var(--sans); font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 14px; display: block; text-align: center; line-height: 1.12; white-space: nowrap; }
+.tl-dot { position: relative; width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; }
+.tl-dot.start { background: #8A9690; }
+.tl-dot.start::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #8A9690; animation: tlPulse 2s ease-out infinite; }
+.good .tl-dot.start::after { animation-delay: 1s; }
+@keyframes tlPulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.6); opacity: 0; } }
+.tl-line { position: relative; width: 2px; height: 72px; margin: 6px 0; background: rgba(255,255,255,0.12); overflow: hidden; border-radius: 2px; }
+.tl-line i { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-origin: top; animation: tlRun 3.6s ease-in-out infinite; }
+.bad .tl-line i { background: linear-gradient(180deg, #8A9690, #D93025); }
+.good .tl-line i { background: linear-gradient(180deg, #8A9690, #1DAA61); }
+@keyframes tlRun { 0% { transform: scaleY(0); } 55%, 90% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.tl-dot.end { background: rgba(255,255,255,0.12); animation: tlEnd 3.6s ease-in-out infinite; }
+.bad .tl-dot.end { --c: #D93025; --g: rgba(217,48,37,0.55); }
+.good .tl-dot.end { --c: #1DAA61; --g: rgba(29,170,97,0.55); }
+@keyframes tlEnd { 0%, 50% { background: rgba(255,255,255,0.12); box-shadow: none; } 58%, 92% { background: var(--c); box-shadow: 0 0 0 5px rgba(255,255,255,0.06), 0 0 18px var(--g); } 100% { background: rgba(255,255,255,0.12); box-shadow: none; } }
+.tl-out { margin-top: 12px; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.12; text-align: center; animation: tlOut 3.6s ease-in-out infinite; }
+.bad .tl-out { color: #FF8A80; } .good .tl-out { color: #7EE2A8; }
+@keyframes tlOut { 0%, 52% { opacity: 0.25; } 60%, 92% { opacity: 1; } 100% { opacity: 0.25; } }
+.sol:not(.inview) .tl-dot, .sol:not(.inview) .tl-dot::after, .sol:not(.inview) .tl-line i, .sol:not(.inview) .tl-out { animation-play-state: paused; }
+@media (min-width: 760px) { .tl { gap: 40px; } .tl-label { font-size: 13px; } .tl-line { height: 96px; } .tl-out { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  .tl-dot.start::after, .tl-line i, .tl-dot.end, .tl-out { animation: none; }
+  .tl-line i { transform: none; } .tl-dot.end { background: var(--c); } .tl-out { opacity: 1; }
+}
+
+/* ---------- Sessão 04 (entregáveis 3D) no padrão das sessões anteriores ---------- */
+.exp-head h2 { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em;
+  font-size: clamp(20px, 6vw, 34px); line-height: 1.15; color: #fff; margin: 0 auto 6px; }
+.exp-head p { font-size: 16px; line-height: 1.3; color: rgba(255,255,255,0.72); }
+.c3d .t { font-family: var(--sans); font-weight: 800; letter-spacing: -0.005em; font-size: 15px; line-height: 1.15; }
+@media (min-width: 600px) { .c3d .t { font-size: 18px; } }
+@media (min-width: 1000px) { .c3d .t { font-size: 20px; } }
+.c3d .mod-num { font-family: var(--sans); font-weight: 800; }
+.exp-caption .type { font-size: 10.5px; letter-spacing: 0.14em; padding: 4px 11px; }
+.exp-caption h3 { font-weight: 800; text-transform: uppercase; letter-spacing: 0.005em; font-size: 18px; line-height: 1.15; margin-bottom: 4px; }
+.exp-caption p { font-size: 14.5px; line-height: 1.3; color: rgba(255,255,255,0.72); }
+@media (min-width: 600px) { .exp-caption h3 { font-size: 22px; } .exp-caption p { font-size: 15.5px; } }
+.exp-hint { font-size: 12px; color: rgba(255,255,255,0.5); }
+.exp-cta .btn-note { color: rgba(255,255,255,0.6); }
+
+/* ---------- Emenda Sessão 03 → 04 (dois verdes escuros) ---------- */
+.sec-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(5,38,26,0) 0%, rgba(5,38,26,0.6) 45%, rgba(5,38,26,0.92) 75%, #05261A 100%); }
+.seam.s34 { height: 40px; background: linear-gradient(180deg, rgb(5,38,26) 0.0%, rgb(5,38,26) 8.3%, rgb(5,36,25) 16.7%, rgb(4,35,24) 25.0%, rgb(4,32,22) 33.3%, rgb(4,29,20) 41.7%, rgb(3,26,18) 50.0%, rgb(2,24,15) 58.3%, rgb(2,21,13) 66.7%, rgb(2,18,11) 75.0%, rgb(1,17,10) 83.3%, rgb(1,15,9) 91.7%, rgb(1,15,9) 100.0%); }
+@media (min-width: 900px) { .seam.s34 { height: 70px; } }
+.sol.pad { padding-bottom: 20px; }
+@media (min-width: 900px) { .sol.pad { padding-bottom: 36px; } }
+.exp { padding-top: 0; }
+@media (min-width: 900px) { .exp { padding-top: 12px; } }
 /* ---------- Ajustes da primeira dobra no celular (sempre por último) ---------- */
 @media (max-width: 599px) {
   .d-only { display: none; }
@@ -982,38 +1036,43 @@ footer nav { display: flex; gap: 18px; }
 
 <!-- ===================== BLOCO 04 · A VIRADA ===================== -->
 <section class="turn sol forest pad fx">
+  <div class="sec-fade" aria-hidden="true"></div>
   <div class="wrap">
     <div class="sol-head">
-      <h2>Sua recepcionista precisa parar de atender e começar a vender.</h2>
-      <p>Mesma recepção, mesmas mensagens. Outro resultado.</p>
+      <h2>Sua recepcionista<br>precisa parar de atender<br>e começar a vender!</h2>
     </div>
 
-    <div class="sol-compare" role="img" aria-label="Comparação de uma resposta comum, que só informa o preço e perde o paciente, com uma resposta conduzida pelo método, que leva ao agendamento.">
-      <div class="sol-side bad">
-        <span class="sol-tag">Atendendo</span>
-        <span class="sol-bubble in">Quanto custa a avaliação?</span>
-        <span class="sol-bubble out">A avaliação custa R$ 350.</span>
-        <span class="sol-result">Não agendou</span>
+    <div class="tl" role="img" aria-label="Linha do tempo: a recepção que só atende termina em atendimento perdido; a recepção que vende termina em consulta agendada.">
+      <div class="tl-col bad">
+        <span class="tl-label">Recepção que<br>atende</span>
+        <span class="tl-dot start"></span>
+        <span class="tl-line"><i></i></span>
+        <span class="tl-dot end"></span>
+        <span class="tl-out">Atendimento perdido</span>
       </div>
-      <div class="sol-side good">
-        <span class="sol-tag">Vendendo</span>
-        <span class="sol-bubble in">Quanto custa a avaliação?</span>
-        <span class="sol-bubble out">Oi, Ana! Me conta o que você quer tratar? Assim já te digo como funciona.</span>
-        <span class="sol-result">Agendou</span>
+      <div class="tl-col good">
+        <span class="tl-label">Recepção que<br>vende</span>
+        <span class="tl-dot start"></span>
+        <span class="tl-line"><i></i></span>
+        <span class="tl-dot end"></span>
+        <span class="tl-out">Consulta agendada</span>
       </div>
     </div>
 
-    <ol class="sol-steps">
-      <li><span class="sol-n">1</span><span><strong>Responde com método</strong><span>Rápido, com as perguntas certas.</span></span></li>
-      <li><span class="sol-n">2</span><span><strong>Conduz até a consulta</strong><span>Valor antes do preço.</span></span></li>
-      <li><span class="sol-n">3</span><span><strong>Confirma e retoma</strong><span>Menos faltas, nenhum lead esquecido.</span></span></li>
-    </ol>
+    <ul class="sol-steps">
+      <li><span class="sol-n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Conduz o diálogo com método</strong></span></li>
+      <li><span class="sol-n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Contorna objeções</strong></span></li>
+      <li><span class="sol-n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Só encerra quando agenda</strong></span></li>
+      <li><span class="sol-n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Entrega o cliente pronto</strong></span></li>
+    </ul>
 
     <div class="sol-cta">
       <a class="btn js-checkout" href="#checkout">Garantir por apenas R$ 47,00</a>
     </div>
   </div>
 </section>
+
+<div class="seam s34" aria-hidden="true"></div>
 
 <!-- ===================== BLOCO 05 · O QUE VOCÊ RECEBE + BLOCO 06 · BÔNUS (palco 3D) ===================== -->
 <section class="exp dark" id="oferta" aria-labelledby="exp-title">
@@ -1025,7 +1084,7 @@ footer nav { display: flex; gap: 18px; }
 
   <div class="wrap">
     <div class="exp-head">
-      <h2 id="exp-title">O que a sua clínica recebe</h2>
+      <h2 id="exp-title">O que a sua<br>clínica recebe</h2>
       <p>2 módulos, 3 materiais e 1 bônus ao vivo.</p>
     </div>
 
