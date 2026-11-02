@@ -16,7 +16,10 @@
 <meta name="description" content="Treinamento prático para a recepção da sua clínica transformar mais mensagens em consultas agendadas. Playbook, scripts e planilha de resultados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+<!-- fontes sem bloquear a primeira exibição da página -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=PT+Serif:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=PT+Serif:wght@700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=PT+Serif:wght@700&display=swap"></noscript>
 
 <!--
   CONFIGURAÇÃO
@@ -4567,6 +4570,7 @@ footer nav {
   function startParticles() { if (ctx && !pRaf && visible && !document.hidden) { pLast = 0; pRaf = requestAnimationFrame(drawParticles); } }
 
   function setVisible(v) {
+    if (v && !inited) init();
     var was = visible; visible = v; sec.classList.toggle('paused', !v);
     if (v) { if (!was) nextAuto = performance.now() + 1200; kick(); startParticles(); }
   }
@@ -4580,12 +4584,21 @@ footer nav {
   window.addEventListener('resize', function () {
     if (window.innerWidth === lastW) return;
     clearTimeout(rt);
-    rt = setTimeout(function () { lastW = window.innerWidth; mobile = window.innerWidth < 600; layout(); sizeCanvas(); render(); }, 150);
+    rt = setTimeout(function () { if (!inited) return; lastW = window.innerWidth; mobile = window.innerWidth < 600; layout(); sizeCanvas(); render(); }, 150);
   });
 
   lastW = window.innerWidth;
-  layout(); sizeCanvas(); render();
-  if (reduce && ctx) { visible = true; drawParticles(0); visible = false; }
+  // monta o palco só quando a seção se aproxima da tela (evita recalcular o layout no carregamento)
+  var inited = false;
+  function init() {
+    if (inited) return; inited = true;
+    layout(); sizeCanvas(); render();
+    if (reduce && ctx) { var v = visible; visible = true; drawParticles(0); visible = v; }
+  }
+  if ('IntersectionObserver' in window) {
+    var io0 = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { io0.disconnect(); requestAnimationFrame(init); } }, { rootMargin: '800px 0px' });
+    io0.observe(sec);
+  } else init();
 })();
 </script>
 
