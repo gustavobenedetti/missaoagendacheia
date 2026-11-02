@@ -17,8 +17,8 @@
 -->
 <script>
   window.MAC_CONFIG = {
-    checkoutUrl: '#checkout',
-    pixelId: ''
+    checkoutUrl: '#checkout',   // ← colar aqui o link do checkout da Cakto
+    pixelId: '1007150102406324'
   };
 </script>
 
@@ -4324,8 +4324,20 @@ footer nav {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Links de compra e evento do pixel ---------- */
+  /* repassa UTMs e identificadores do anúncio (utm_*, fbclid, src, sck) para o checkout da Cakto */
+  function withTracking(url) {
+    if (!url || url.charAt(0) === '#') return url;
+    try {
+      var out = new URL(url, location.href);
+      var inp = new URLSearchParams(location.search);
+      inp.forEach(function (v, k) {
+        if (/^(utm_|fbclid$|src$|sck$)/i.test(k) && !out.searchParams.has(k)) out.searchParams.set(k, v);
+      });
+      return out.toString();
+    } catch (e) { return url; }
+  }
   document.querySelectorAll('.js-checkout').forEach(function (a) {
-    a.setAttribute('href', cfg.checkoutUrl || '#checkout');
+    a.setAttribute('href', withTracking(cfg.checkoutUrl || '#checkout'));
     a.addEventListener('click', function () {
       if (typeof window.fbq === 'function') {
         var id = 'mac_ic_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
