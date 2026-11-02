@@ -4338,12 +4338,7 @@ footer nav {
   }
   document.querySelectorAll('.js-checkout').forEach(function (a) {
     a.setAttribute('href', withTracking(cfg.checkoutUrl || '#checkout'));
-    a.addEventListener('click', function () {
-      if (typeof window.fbq === 'function') {
-        var id = 'mac_ic_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-        window.fbq('track', 'InitiateCheckout', { value: 47, currency: 'BRL', content_name: 'Método Agenda Full' }, { eventID: id });
-      }
-    });
+    /* InitiateCheckout é enviado pela própria Cakto ao abrir o checkout (evita contagem dupla) */
   });
 
   /* ---------- Agenda da semana ---------- */
