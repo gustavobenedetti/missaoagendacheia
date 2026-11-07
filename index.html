@@ -3690,12 +3690,14 @@ footer nav {
 })();
 </script>
 <script>
-/* Meta Pixel: carrega já na abertura (assíncrono), para registrar toda visita vinda do anúncio
-   (a "visualização da página de destino" do Meta depende disso).
+/* Meta Pixel: o PageView fica na fila desde o primeiro instante e o script do Meta carrega logo após o "load"
+   da página, para registrar toda visita (a "visualização da página de destino" depende disso) sem atrasar a primeira tela.
    Clarity: entra no primeiro toque/rolagem, ou 5,5 s depois que a página carregou. */
 (function(){
   function add(src){var t=document.createElement('script');t.async=true;t.src=src;document.head.appendChild(t);}
-  if (window.MAC_CONFIG && window.MAC_CONFIG.pixelId) add('https://connect.facebook.net/en_US/fbevents.js');
+  /* Pixel: entra assim que a página termina de carregar (não disputa banda com a primeira tela) */
+  function px(){ if (window.MAC_CONFIG && window.MAC_CONFIG.pixelId) add('https://connect.facebook.net/en_US/fbevents.js'); }
+  if (document.readyState === 'complete') px(); else addEventListener('load', px, { once: true });
   var done=false;
   function go(){ if(done) return; done=true;
     add('https://www.clarity.ms/tag/uguzazcl8r');
