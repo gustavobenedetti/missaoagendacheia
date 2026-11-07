@@ -10,6 +10,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Método Agenda Full | Treinamento para a recepção da sua clínica</title>
 <meta name="description" content="Treinamento prático para a recepção da sua clínica transformar mais mensagens em consultas agendadas. Playbook, scripts e planilha de resultados.">
+<meta name="theme-color" content="#021A11">
+<!-- prévia do link (WhatsApp, Instagram, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Método Agenda Full">
+<meta property="og:title" content="Método Agenda Full | Treinamento para a recepção da sua clínica">
+<meta property="og:description" content="Copie e cole o método que fez nossas clínicas parceiras dobrarem os agendamentos em 7 dias. Por R$ 47 ou 11x de R$ 5,33.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23021A11'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23E3B94F' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fontes sem bloquear a primeira exibição da página -->
@@ -3878,13 +3886,14 @@ footer nav {
 })();
 </script>
 <script>
-/* scripts de terceiros (Meta Pixel e Clarity) entram no primeiro toque/rolagem, ou 5,5 s depois que a página carregou.
-   O PageView já fica na fila do fbq desde o início e é enviado assim que o script do Meta chega. */
+/* Meta Pixel: carrega já na abertura (assíncrono), para registrar toda visita vinda do anúncio
+   (a "visualização da página de destino" do Meta depende disso).
+   Clarity: entra no primeiro toque/rolagem, ou 5,5 s depois que a página carregou. */
 (function(){
-  var done=false;
   function add(src){var t=document.createElement('script');t.async=true;t.src=src;document.head.appendChild(t);}
+  if (window.MAC_CONFIG && window.MAC_CONFIG.pixelId) add('https://connect.facebook.net/en_US/fbevents.js');
+  var done=false;
   function go(){ if(done) return; done=true;
-    if (window.MAC_CONFIG && window.MAC_CONFIG.pixelId) add('https://connect.facebook.net/en_US/fbevents.js');
     add('https://www.clarity.ms/tag/uguzazcl8r');
     ['scroll','touchstart','pointerdown','keydown'].forEach(function(e){removeEventListener(e,go,true)});
   }
